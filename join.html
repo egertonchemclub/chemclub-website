@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Join the Egerton Chemistry Society (EUCCA) and become part of a vibrant community passionate about chemical sciences. Apply now!">
+    <meta name="keywords" content="Join Egerton Chemistry Society, EUCCA Membership, Chemistry Club Application, Egerton University Students">
+    <meta name="author" content="Egerton Chemistry Society">
+    <meta name="google-site-verification" content="9ZkIZjBYkr404Y90LhnjkBmQVq_5eNr5K4iU4B4_Wks" />
+
+    <meta property="og:title" content="Join Us | Egerton Chemistry Society">
+    <meta property="og:description" content="Become a member of the Egerton Chemistry Society (EUCCA) and explore your passion for chemistry.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="./images/lab-photo.jpg">
+    <meta property="og:site_name" content="Egerton Chemistry Society">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Join Us | Egerton Chemistry Society">
+    <meta name="twitter:description" content="Apply to become a member of the Egerton Chemistry Society (EUCCA).">
+    <meta name="twitter:image" content="./images/lab-photo.jpg">
+
+    <link rel="icon" href="./images/favicon.jpg" type="image/png">
+    <title>Join Us | Egerton Chemistry Society</title>
+    <link rel="stylesheet" href="./dist/output.css">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <style>
+        @font-face {
+            font-family: 'Inter';
+            src: url('./fonts/InterVariable.woff2') format('woff2-variations'),
+                 url('./fonts/InterVariable.woff2') format('woff2');
+            font-weight: 100 900;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Inter';
+            src: url('./fonts/InterVariable-Italic.woff2') format('woff2-variations'),
+                 url('./fonts/InterVariable-Italic.woff2') format('woff2');
+            font-weight: 100 900;
+            font-style: italic;
+            font-display: swap;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .hero-gradient {
+            background: linear-gradient(to right, rgba(23, 23, 35, 0.95), rgba(30, 41, 59, 0.8));
+        }
+        .card-hover {
+            transition: all 0.3s ease-in-out;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
+                        0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        /* Improved Form Styling */
+        label {
+            @apply block text-sm font-medium text-slate-700 mb-1;
+        }
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            @apply mt-1 block w-full px-4 py-2 bg-white border border-slate-300 rounded-md shadow-sm 
+                   placeholder-slate-400
+                   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent 
+                   sm:text-sm;
+        }
+        textarea {
+            @apply min-h-[100px] resize-y; /* Allow vertical resize */
+        }
+        /* Style the form container */
+        form {
+            @apply bg-white p-8 md:p-10 rounded-xl shadow-lg border border-slate-200;
+        }
+    </style>
+    
+
+</head>
+<body class="text-slate-800">
+
+    <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <svg class="h-8 w-8 text-blue-600" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s-8-4.48-8-12 8-10 8-10 8 4.48 8 12-8 10-8 10Z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                    <span class="text-xl font-bold text-slate-900">Egerton Chem Society</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="font-medium text-slate-700 hover:text-blue-600 transition-colors">Home</a>
+                    <a href="about.html" class="font-medium text-slate-700 hover:text-blue-600 transition-colors">About</a>
+                    <a href="index.html#events" class="font-medium text-slate-700 hover:text-blue-600 transition-colors">Events</a>
+                    <a href="index.html#contact" class="font-medium text-slate-700 hover:text-blue-600 transition-colors">Contact</a>
+                    <a href="join.html" class="inline-block px-5 py-2.5 bg-blue-700 text-white font-medium rounded-full shadow-md ring-2 ring-blue-300 transition-all">
+                        Join Us
+                    </a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-slate-900">
+                        <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-4 pt-2 pb-4 space-y-2 bg-white border-t border-slate-200">
+            <a href="index.html" class="block py-2 text-base font-medium text-slate-700 hover:text-blue-600 transition-colors">Home</a>
+            <a href="about.html" class="block py-2 text-base font-medium text-slate-700 hover:text-blue-600 transition-colors">About</a>
+            <a href="index.html#events" class="block py-2 text-base font-medium text-slate-700 hover:text-blue-600 transition-colors">Events</a>
+            <a href="index.html#contact" class="block py-2 text-base font-medium text-slate-700 hover:text-blue-600 transition-colors">Contact</a>
+            <a href="join.html" class="block w-full text-center px-5 py-3 bg-blue-700 text-white font-medium rounded-full shadow-md ring-2 ring-blue-300 transition-all">
+                Join Us
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <section class="relative">
+            <div class="absolute inset-0">
+                <img src="./images/group-photo.jpg" alt="Group of students collaborating" class="w-full h-full object-cover">
+                <div class="absolute inset-0 hero-gradient opacity-90"></div>
+            </div>
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
+                <h2 class="text-base font-semibold text-blue-400 uppercase tracking-wide">Become a Member</h2>
+                <p class="mt-2 text-4xl font-extrabold text-white sm:text-5xl">
+                    Join the EUCCA Community
+                </p>
+                <p class="mt-6 text-xl text-slate-200 max-w-3xl mx-auto">
+                    Connect with fellow chemistry enthusiasts, participate in exciting events, gain hands-on experience, and boost your career prospects.
+                </p>
+            </div>
+        </section>
+
+        <section id="details" class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+                <div>
+                    <h2 class="text-3xl font-extrabold text-slate-900 sm:text-4xl mb-6">
+                        Why Join EUCCA?
+                    </h2>
+                    <ul class="space-y-4 text-lg text-slate-600">
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-green-500 mr-3 shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+                            <span>Network with peers, faculty, and industry professionals.</span>
+                        </li>
+                        <li class="flex items-start">
+                           <svg class="h-6 w-6 text-green-500 mr-3 shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+                            <span>Gain hands-on experience through workshops and lab sessions.</span>
+                        </li>
+                         <li class="flex items-start">
+                           <svg class="h-6 w-6 text-green-500 mr-3 shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+                            <span>Attend exclusive industrial talks, seminars, and field trips.</span>
+                        </li>
+                         <li class="flex items-start">
+                           <svg class="h-6 w-6 text-green-500 mr-3 shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+                            <span>Participate in research projects and national competitions.</span>
+                        </li>
+                         <li class="flex items-start">
+                           <svg class="h-6 w-6 text-green-500 mr-3 shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+                            <span>Develop leadership and teamwork skills.</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-slate-50 p-8 rounded-xl shadow-lg border border-slate-200">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4">
+                        Membership Details
+                    </h3>
+                    <div class="space-y-4 text-slate-700">
+                        <p>
+                            <strong class="font-semibold text-slate-800">Eligibility:</strong> Membership is open to all registered students of Egerton University, regardless of their course of study. We welcome anyone with an interest in chemistry!
+                        </p>
+                        <p>
+                            <strong class="font-semibold text-slate-800">Membership Fee:</strong> An annual fee of **KES 100** is required for registration and to support our activities.
+                        </p>
+                        <p>
+                            <strong class="font-semibold text-slate-800">Membership Certificate:</strong> A membership certificate is available upon request for an additional **KES 100**.
+                        </p>
+                        <p>
+                            <strong class="font-semibold text-slate-800">How to Join:</strong> Simply fill out the application form below. Our Secretary General will review your application and contact you with further details regarding payment and membership confirmation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+     <section id="application-form" class="py-24 bg-gradient-to-b from-slate-100 to-slate-200">
+  <div class="max-w-3xl mx-auto px-6">
+    <div class="text-center mb-14">
+      <h2 class="text-4xl font-bold text-slate-900 mb-3">Membership Application</h2>
+      <p class="text-slate-600 max-w-xl mx-auto">
+        Join the Egerton Chemistry Society and grow with a passionate community of young scientists.
+      </p>
+    </div>
+
+    <form id="joinForm" class="relative bg-white rounded-2xl shadow-2xl border border-slate-200 p-10 space-y-8 overflow-hidden">
+
+    <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-100 via-transparent to-blue-50 opacity-60 pointer-events-none z-0"></div>
+
+    <div class="relative z-10 space-y-8"> 
+
+        <div>
+            <label for="full-name" class="block text-slate-700 font-medium mb-1">Full Name</label>
+            <input type="text" id="full-name" name="full-name" required
+                   class="w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 text-slate-800 shadow-sm
+                   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition" placeholder="e.g. Jane Chemist" />
+        </div>
+
+        <div>
+            <label for="reg-number" class="block text-slate-700 font-medium mb-1">Registration Number</label>
+            <input type="text" id="reg-number" name="reg-number" required
+                   class="w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 text-slate-800 shadow-sm
+                   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition" placeholder="e.g. S13/12345/20" />
+        </div>
+
+        <div>
+            <label for="phone-number" class="block text-slate-700 font-medium mb-1">Phone Number</label>
+            <input type="tel" id="phone-number" name="phone-number" required
+                   class="w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 text-slate-800 shadow-sm
+                   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition" placeholder="e.g. 0712 345 678" />
+        </div>
+
+        <div>
+            <label for="email" class="block text-slate-700 font-medium mb-1">Email Address</label>
+            <input type="email" id="email" name="email" required
+                   class="w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 text-slate-800 shadow-sm
+                   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition" placeholder="your.email@student.egerton.ac.ke" />
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <label for="course" class="block text-slate-700 font-medium mb-1">Course of Study</label>
+                <input type="text" id="course" name="course" required
+                       class="w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 text-slate-800 shadow-sm
+                       focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition" placeholder="e.g. BSc Industrial Chemistry" />
+            </div>
+
+            <div>
+                <label for="year-of-study" class="block text-slate-700 font-medium mb-1">Year of Study</label>
+                <select id="year-of-study" name="year-of-study" required
+                        class="w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 text-slate-700 shadow-sm
+                        focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition">
+                    <option value="" disabled selected>Select your year</option>
+                    <option value="1">1st Year</option>
+                    <option value="2">2nd Year</option>
+                    <option value="3">3rd Year</option>
+                    <option value="4">4th Year</option>
+                    <option value="Postgraduate">Postgraduate</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+        </div>
+
+        <div>
+            <label for="comments" class="block text-slate-700 font-medium mb-1">Additional Comments (Optional)</label>
+            <textarea id="comments" name="comments" rows="4"
+                      class="w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 text-slate-800 shadow-sm
+                      focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition resize-y"
+                      placeholder="Any additional comments?"></textarea>
+        </div>
+
+        <div class="text-center pt-8"> 
+            <button type="submit"
+                    class="inline-block px-8 py-3 rounded-full text-lg font-semibold 
+                    bg-blue-600 text-white shadow-lg 
+                    hover:bg-blue-700 hover:shadow-xl hover:scale-105 
+                    transform transition-all duration-300 ease-in-out
+                    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                Submit Application
+            </button>
+        </div>
+
+    </div> 
+    </form>
+  </div>
+</section>
+
+    </main>
+
+    <footer id="contact" class="bg-slate-900 text-slate-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div class="md:col-span-2">
+                    <a href="index.html" class="flex items-center space-x-2 mb-4">
+                        <svg class="h-8 w-8 text-blue-500" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s-8-4.48-8-12 8-10 8-10 8 4.48 8 12-8 10-8 10Z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                        <span class="text-xl font-bold text-white">Egerton Chemistry Society</span>
+                    </a>
+                    <p class="text-slate-400">
+                        Based at Egerton University, we are a community fostering a passion for the chemical sciences.
+                    </p>
+                    <div class="flex space-x-5 mt-6">
+                        <a href="https://www.facebook.com/YourSocietyPage" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-blue-500">
+                            <span class="sr-only">Facebook</span>
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
+                        </a>
+                        <a href="https://wa.me/254743569285" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-blue-500">
+                            <span class="sr-only">WhatsApp</span>
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.79.46 3.48 1.28 4.96L2 22l5.3-1.38c1.41.75 3.01 1.18 4.74 1.18c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zM12.04 20.15c-1.55 0-3.03-.4-4.32-1.1L3.9 20.28l1.23-3.8c-.83-1.34-1.28-2.9-1.28-4.57c0-4.5 3.65-8.15 8.15-8.15c4.5 0 8.15 3.65 8.15 8.15c0 4.5-3.65 8.15-8.15 8.15zM17.39 14.1c-.2-.1-.72-.36-1.08-.5c-.36-.14-.62-.24-.88.24c-.26.48-.98 1.2-1.2 1.44c-.22.24-.44.28-.8.14c-1.12-.44-2.42-1.2-3.48-2.8c-.8-.1.2-.68 1.14-1.6c.14-.14.28-.34.42-.58c.14-.24.07-.44-.04-.58c-.1-.14-.88-2.1-.12-2.88c-.16-.68-.34-.58-.48-.58c-.14 0-.3 0-.44 0c-.14 0-.38.04-.58.24c-.2.2-.78.74-.78 1.8c0 1.06.8 2.08.92 2.22c.12.14 1.57 2.4 3.8 3.36c.54.22.94.34 1.28.44c.5.14.94.12 1.3.08c.4-.04 1.22-.5 1.4-1c.18-.48.18-.9.12-1c-.06-.1-.2-.14-.4-.24z"/></svg>
+                        </a>
+                        <a href="mailto:egertonchemclub@gmail.com" class="text-slate-400 hover:text-blue-500">
+                            <span class="sr-only">Email</span>
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5l-8-5h16zm0 12H4V8l8 5l8-5v10z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-slate-100 uppercase tracking-wider">Quick Links</h3>
+                    <ul class="mt-4 space-y-3">
+                        <li><a href="about.html" class="text-slate-400 hover:text-white">About Us</a></li>
+                        <li><a href="index.html#events" class="text-slate-400 hover:text-white">Events</a></li>
+                        <li><a href="about.html#team" class="text-slate-400 hover:text-white">Our Team</a></li>
+                        <li><a href="join.html" class="text-white font-semibold">Join</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-slate-100 uppercase tracking-wider">Contact</h3>
+                    <ul class="mt-4 space-y-3">
+                        <li class="flex items-start">
+                            <svg class="h-5 w-5 text-slate-500 mr-2 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /></svg>
+                            <span class="text-slate-400">Egerton University, Njoro, Kenya</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-5 w-5 text-slate-500 mr-2 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 10.884l7.997-5H2.003zM18 7.116l-8 5-8-5V14a2 2 0 002 2h12a2 2 0 002-2V7.116z" /></svg>
+                            <a href="mailto:egertonchemclub@gmail.com" class="text-slate-400 hover:text-white">egertonchemclub@gmail.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-slate-700 pt-8 text-center">
+                <p class="text-sm text-slate-500">
+                    &copy; 2025 Egerton Chemistry Society. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+    <img id="cert-template" src="./images/template.png" alt="Certificate Template" style="display: none;">
+    <script src="jspdf.min.js"></script>
+    <script src="certificates.js"></script>
+
+</body>
+</html>

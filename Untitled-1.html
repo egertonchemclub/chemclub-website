@@ -1,0 +1,96 @@
+<section id="application-form" class="py-24 bg-gradient-to-b from-slate-100 to-slate-200">
+  <div class="max-w-3xl mx-auto px-6">
+    
+    <!-- Section Title -->
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-slate-900 mb-3">Join the Chemistry Club</h2>
+      <p class="text-slate-600 max-w-xl mx-auto">
+        Become part of a vibrant scientific community at Egerton University.
+      </p>
+    </div>
+
+    <!-- Form Container -->
+    <form action="#" method="POST"
+      class="bg-white/80 backdrop-blur-sm p-8 md:p-12 rounded-2xl shadow-2xl border border-slate-200 space-y-8">
+
+      <!-- Full Name & Reg Number -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="relative">
+          <input type="text" id="full-name" name="full-name" required
+            class="peer w-full border border-slate-300 rounded-lg px-4 pt-5 pb-2 text-slate-800 placeholder-transparent focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none transition"
+            placeholder="Full Name" />
+          <label for="full-name"
+            class="absolute text-slate-500 text-sm left-4 top-2.5 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-slate-400 peer-focus:top-2.5 peer-focus:text-sm peer-focus:text-blue-600">
+            Full Name
+          </label>
+        </div>
+
+        <div class="relative">
+          <input type="text" id="reg-number" name="reg-number" required
+            class="peer w-full border border-slate-300 rounded-lg px-4 pt-5 pb-2 text-slate-800 placeholder-transparent focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none transition"
+            placeholder="Registration Number" />
+          <label for="reg-number"
+            class="absolute text-slate-500 text-sm left-4 top-2.5 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-slate-400 peer-focus:top-2.5 peer-focus:text-sm peer-focus:text-blue-600">
+            Registration Number
+          </label>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="relative">
+        <input type="email" id="email" name="email" required
+          class="peer w-full border border-slate-300 rounded-lg px-4 pt-5 pb-2 text-slate-800 placeholder-transparent focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none transition"
+          placeholder="Email Address" />
+        <label for="email"
+          class="absolute text-slate-500 text-sm left-4 top-2.5 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-slate-400 peer-focus:top-2.5 peer-focus:text-sm peer-focus:text-blue-600">
+          Email Address
+        </label>
+      </div>
+
+      <!-- Course & Year -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="relative">
+          <input type="text" id="course" name="course" required
+            class="peer w-full border border-slate-300 rounded-lg px-4 pt-5 pb-2 text-slate-800 placeholder-transparent focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none transition"
+            placeholder="Course of Study" />
+          <label for="course"
+            class="absolute text-slate-500 text-sm left-4 top-2.5 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-slate-400 peer-focus:top-2.5 peer-focus:text-sm peer-focus:text-blue-600">
+            Course of Study
+          </label>
+        </div>
+
+        <div class="relative">
+          <select id="year-of-study" name="year-of-study" required
+            class="w-full border border-slate-300 rounded-lg px-4 py-4 text-slate-700 bg-transparent focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none transition">
+            <option value="" disabled selected>Select your year</option>
+            <option value="1">1st Year</option>
+            <option value="2">2nd Year</option>
+            <option value="3">3rd Year</option>
+            <option value="4">4th Year</option>
+            <option value="Postgraduate">Postgraduate</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Comments -->
+      <div class="relative">
+        <textarea id="comments" name="comments" rows="4"
+          class="peer w-full border border-slate-300 rounded-lg px-4 pt-5 pb-2 text-slate-800 placeholder-transparent focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none transition"
+          placeholder="Additional Comments (Optional)"></textarea>
+        <label for="comments"
+          class="absolute text-slate-500 text-sm left-4 top-2.5 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-slate-400 peer-focus:top-2.5 peer-focus:text-sm peer-focus:text-blue-600">
+          Additional Comments (Optional)
+        </label>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="text-center pt-4">
+        <button type="submit"
+          class="px-10 py-3.5 bg-blue-600 text-white font-semibold text-lg rounded-full shadow-lg hover:bg-blue-700 hover:scale-105 transition-transform duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+          Submit Application
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

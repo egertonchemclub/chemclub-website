@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Industrial Visits - Egerton Chemistry Society</title>
+    <link rel="stylesheet" href="./dist/output.css">
+    
+    <style>
+        @font-face { font-family: 'Inter'; src: url('./fonts/InterVariable.woff2') format('woff2'); font-weight: 100 900; font-display: swap; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .hero-gradient { background: linear-gradient(to right, rgba(23, 23, 35, 0.95), rgba(30, 41, 59, 0.8)); }
+        
+        .card-hover { transition: all 0.3s ease-in-out; }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
+
+        /* --- FORCE MODAL STYLES --- */
+        .custom-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 23, 42, 0.85);
+            z-index: 9999; 
+            display: none; 
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .custom-modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .custom-modal-box {
+            background: white;
+            width: 90%;
+            max-width: 500px; 
+            border-radius: 16px; 
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+            overflow: hidden;
+        }
+
+        .custom-modal-overlay.active .custom-modal-box {
+            transform: scale(1);
+        }
+    </style>
+</head>
+
+<body class="text-slate-800 relative">
+
+    <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-40">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <svg class="h-8 w-8 text-blue-600" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s-8-4.48-8-12 8-10 8-10 8 4.48 8 12-8 10-8 10Z"/><circle cx="12" cy="12" r="3"/>
+                    </svg>
+                    <span class="text-xl font-bold text-slate-900">Egerton Chem Society</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="font-medium text-slate-700 hover:text-blue-600 transition-colors">Home</a>
+                    <a href="index.html#events" class="font-medium text-slate-700 hover:text-blue-600 transition-colors">Events</a>
+                    <a href="join.html" class="px-5 py-2.5 bg-blue-600 text-white font-medium rounded-full shadow-md hover:bg-blue-700 transition-all">Join Us</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="relative py-20 bg-slate-900 text-center px-4 overflow-hidden">
+            <div class="absolute inset-0">
+                <div class="absolute inset-0 bg-slate-900 opacity-90"></div>
+                <div class="absolute inset-0 hero-gradient opacity-80"></div>
+            </div>
+            
+            <div class="relative z-10 max-w-3xl mx-auto">
+                <h1 class="text-4xl sm:text-5xl font-extrabold text-white leading-tight mb-4">
+                    Bridging Theory & Industry
+                </h1>
+                <p class="text-lg text-slate-200 mb-8">
+                    From research labs in Kisumu to manufacturing plants in Nairobi. We take chemistry out of the classroom.
+                </p>
+            </div>
+        </section>
+
+        <section class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center gap-4 mb-10">
+                    <div class="h-10 w-2 bg-blue-600 rounded-full"></div>
+                    <h2 class="text-3xl font-extrabold text-slate-900">Upcoming Adventures</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    
+                    <div class="flex flex-col bg-white rounded-xl shadow-xl overflow-hidden card-hover border border-slate-100">
+                        <div class="relative h-56">
+                            <img class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="./images/osho-chemicals.jpg" alt="Nairobi Industrial Trip">
+                            <div class="absolute top-4 right-4 bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow-md">
+                                Registration Open
+                            </div>
+                        </div>
+
+                        <div class="p-6 flex flex-col flex-grow">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold text-slate-900">Nairobi Industrial Tour</h3>
+                                <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded">KES 800</span>
+                            </div>
+                            
+                            <p class="text-slate-600 text-sm mb-4 flex-grow">
+                                A dual visit to <strong>Pfizer</strong> (Pharmaceuticals) and <strong>Osho Chemicals</strong>. Witness drug formulation and agro-chemical manufacturing.
+                            </p>
+
+                            <button onclick="openBookingModal('Nairobi Industrial Tour', '800')" 
+                                    class="text-left font-bold text-blue-600 hover:text-blue-800 flex items-center gap-2 mt-auto group transition-colors focus:outline-none">
+                                Book Seat Now 
+                                <span class="transition-transform group-hover:translate-x-1">&rarr;</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col bg-white rounded-xl shadow-xl overflow-hidden card-hover border border-slate-100">
+                        <div class="relative h-56">
+                            <img class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="./images/finlays.jpg" alt="Finlays Kericho">
+                        </div>
+
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Finlays Tea Extracts</h3>
+                            <p class="text-slate-600 text-sm mb-4 flex-grow">
+                                Kericho. We are organizing a trip to study the industrial extraction of polyphenols and tea chemistry.
+                            </p>
+                            <p class="text-slate-400 font-medium mt-auto">
+                                Details Coming Soon...
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 bg-slate-50 border-t border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-16">
+                    <h2 class="text-base font-semibold text-blue-600 uppercase tracking-wide">Our History</h2>
+                    <p class="mt-2 text-3xl font-extrabold text-slate-900">Where We Have Been</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <div class="flex flex-col bg-white rounded-xl shadow-xl overflow-hidden card-hover">
+                        <div class="relative h-56">
+                            <img class="w-full h-full object-cover" src="./images/kemri-kisumu.jpg" alt="KEMRI Kisumu">
+                            <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-4">
+                            </div>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">KEMRI CGHR</h3>
+                            <p class="text-slate-600 text-sm mb-4 flex-grow">
+                                We visited the Centre for Global Health Research. Highlights included the Malaria Laboratories and the Entomology Unit.
+                            </p>
+                            <span class="text-slate-400 text-xs font-medium mt-auto">Date: Feb 2024</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col bg-white rounded-xl shadow-xl overflow-hidden card-hover">
+                        <div class="relative h-56">
+                            <img class="w-full h-full object-cover" src="./images/kemri.jpg" alt="KEMRI Nairobi">
+                            <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-4">
+                            </div>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">KEMRI Headquarters</h3>
+                            <p class="text-slate-600 text-sm mb-4 flex-grow">
+                                A deep dive into the Production Department. We saw how culture media is manufactured.
+                            </p>
+                            <span class="text-slate-400 text-xs font-medium mt-auto">Date: Oct 2024</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col bg-white rounded-xl shadow-xl overflow-hidden card-hover">
+                        <div class="relative h-56">
+                            <img class="w-full h-full object-cover" src="./images/kephis.jpg" alt="KEPHIS Nairobi">
+                            <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-4">
+                                <span class="text-white text-xs font-bold uppercase tracking-wider bg-green-600 px-2 py-1 rounded">Nairobi</span>
+                            </div>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">KEPHIS HQ</h3>
+                            <p class="text-slate-600 text-sm mb-4 flex-grow">
+                                Kenya Plant Health Inspectorate Service. Students learned about pesticide residue analysis.
+                            </p>
+                            <span class="text-slate-400 text-xs font-medium mt-auto">Date: Nov 2024</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-900 text-slate-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <span class="text-xl font-bold text-white">Egerton Chemistry Society</span>
+                    <p class="text-slate-500 text-sm mt-1">Exploring the world, one molecule at a time.</p>
+                </div>
+                <div class="text-sm text-slate-500">
+                    &copy; 2025 Egerton Chemistry Society.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="bookingModal" class="custom-modal-overlay">
+        <div class="custom-modal-box">
+            
+            <div class="bg-slate-900 px-6 py-4 flex justify-between items-center">
+                <div>
+                    <h3 class="text-lg font-bold text-white tracking-wide" id="modalTripTitle">Book Seat</h3>
+                    <p class="text-slate-400 text-xs">Complete your registration</p>
+                </div>
+                <button onclick="closeBookingModal()" class="text-slate-400 hover:text-white transition-colors">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+
+            <div class="px-8 py-8 sm:px-10">
+                <div class="flex justify-between items-center mb-6 border-b border-slate-100 pb-4">
+                    <span class="text-sm text-slate-500 font-bold uppercase tracking-wider">Total Cost</span>
+                    <span class="text-2xl font-extrabold text-slate-900">KES <span id="modalTripCost">800</span></span>
+                </div>
+                
+                <form id="tripBookingForm" class="space-y-4">
+                    <input type="hidden" id="tripNameInput">
+                    
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Full Name</label>
+                        <input type="text" id="tripName" required class="w-full rounded-md border border-slate-300 px-4 py-2.5 text-slate-900 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 focus:outline-none transition-shadow" placeholder="e.g. John Doe">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Registration Number</label>
+                        <input type="text" id="tripReg" required class="w-full rounded-md border border-slate-300 px-4 py-2.5 text-slate-900 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 focus:outline-none transition-shadow" placeholder="e.g. S13/00000/21">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Phone Number</label>
+                        <input type="tel" id="tripPhone" required class="w-full rounded-md border border-slate-300 px-4 py-2.5 text-slate-900 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 focus:outline-none transition-shadow" placeholder="07XX XXX XXX">
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="w-full mt-4 py-3.5 bg-slate-900 text-white font-bold rounded-lg hover:bg-slate-800 transition shadow-lg text-sm tracking-wide">
+                        SUBMIT & GET PAYMENT INFO
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="paymentModal" class="custom-modal-overlay">
+        <div class="custom-modal-box">
+            
+            <div class="bg-slate-900 px-6 py-6 text-center">
+                <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-green-500 mb-3 border-4 border-slate-800">
+                    <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                </div>
+                <h3 class="text-xl font-bold text-white">Details Received!</h3>
+                <p class="text-slate-400 text-sm mt-1">Your reservation is pending payment.</p>
+            </div>
+            
+            <div class="px-8 py-8 sm:px-10 space-y-6">
+                
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 text-center relative overflow-hidden">
+                    <p class="text-xs text-slate-500 uppercase font-bold mb-2">Send M-Pesa To:</p>
+                    
+                    <div class="flex items-center justify-center gap-3 mb-1">
+                        <p class="text-3xl font-extrabold text-slate-900 tracking-wider" id="treasurerPhone">0743 569 285</p>
+                        <button onclick="copyNumber()" class="text-slate-400 hover:text-blue-600 transition-colors p-1" title="Copy Number">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                        </button>
+                    </div>
+                    <p id="copyFeedback" class="text-green-600 text-xs font-bold h-4 opacity-0 transition-opacity">Copied!</p>
+                    
+                    <p class="text-sm font-medium text-slate-700 mb-4">James Njoroge</p>
+                    
+                    <div class="border-t border-slate-200 pt-4 flex justify-between items-center px-2">
+                        <span class="text-xs text-slate-500 uppercase font-bold">Pay Amount:</span>
+                        <span class="text-xl font-bold text-slate-900">KES <span id="payAmount">800</span></span>
+                    </div>
+                </div>
+
+                <button onclick="closePaymentModal()" class="w-full rounded-lg bg-slate-900 px-4 py-3.5 text-sm font-bold text-white hover:bg-slate-800 transition shadow-lg tracking-wide">
+                    I HAVE COMPLETED PAYMENT
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // *** PASTE YOUR GOOGLE SCRIPT URL HERE ***
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzpAiQT559IJ-vZ5EUgI-P8O1xyoGw7xJ26BJ3OaGCksEBMtHmr6n1b3GYyJnbSS57LKw/exec"; 
+
+        const bookingModal = document.getElementById('bookingModal');
+        const paymentModal = document.getElementById('paymentModal');
+        const tripForm = document.getElementById('tripBookingForm');
+
+        // COPY FUNCTION
+        function copyNumber() {
+            const num = "0743569285"; // The raw number to copy
+            navigator.clipboard.writeText(num).then(() => {
+                const feedback = document.getElementById('copyFeedback');
+                feedback.classList.remove('opacity-0');
+                setTimeout(() => {
+                    feedback.classList.add('opacity-0');
+                }, 2000);
+            });
+        }
+
+        // OPEN MODAL
+        function openBookingModal(tripName, cost) {
+            document.getElementById('modalTripTitle').innerText = tripName;
+            document.getElementById('modalTripCost').innerText = cost;
+            document.getElementById('tripNameInput').value = tripName;
+            document.getElementById('payAmount').innerText = cost; 
+            
+            bookingModal.classList.add('active');
+        }
+
+        // CLOSE MODALS
+        function closeBookingModal() {
+            bookingModal.classList.remove('active');
+        }
+        function closePaymentModal() {
+            paymentModal.classList.remove('active');
+            window.location.reload(); 
+        }
+
+        // SUBMIT FORM
+        tripForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const btn = document.getElementById('submitBtn');
+            const originalText = btn.innerText;
+            btn.innerText = "SAVING...";
+            btn.disabled = true;
+            btn.classList.add('opacity-75', 'cursor-not-allowed');
+
+            const formData = {
+                name: document.getElementById('tripName').value,
+                regNumber: document.getElementById('tripReg').value,
+                phoneNumber: document.getElementById('tripPhone').value,
+                tripType: document.getElementById('tripNameInput').value
+            };
+
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData)
+            })
+            .then(() => {
+                // Hide Booking, Show Payment
+                bookingModal.classList.remove('active');
+                paymentModal.classList.add('active');
+                
+                btn.innerText = originalText;
+                btn.disabled = false;
+                btn.classList.remove('opacity-75', 'cursor-not-allowed');
+            })
+            .catch(err => {
+                console.error("Error:", err);
+                alert("Connection Error. Please try again.");
+                btn.innerText = originalText;
+                btn.disabled = false;
+                btn.classList.remove('opacity-75', 'cursor-not-allowed');
+            });
+        });
+    </script>
+
+</body>
+</html>
