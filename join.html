@@ -18,7 +18,7 @@
     <meta name="twitter:description" content="Apply to become a member of the Egerton Chemistry Society (EUCCA).">
     <meta name="twitter:image" content="./images/lab-photo.jpg">
 
-    <link rel="icon" href="./images/favicon.jpg" type="image/png">
+    <link rel="icon" href="./images/favicon.png?v=2" type="image/png">
     <title>Join Us | Egerton Chemistry Society</title>
     <link rel="stylesheet" href="./dist/output.css">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
@@ -57,7 +57,7 @@
             box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
                         0 8px 10px -6px rgb(0 0 0 / 0.1);
         }
-        /* Improved Form Styling */
+        
         label {
             @apply block text-sm font-medium text-slate-700 mb-1;
         }
@@ -72,20 +72,22 @@
                    sm:text-sm;
         }
         textarea {
-            @apply min-h-[100px] resize-y; /* Allow vertical resize */
+            @apply min-h-[100px] resize-y;
         }
-        /* Style the form container */
         form {
             @apply bg-white p-8 md:p-10 rounded-xl shadow-lg border border-slate-200;
         }
-        /* Force IntaSend's injected padlock to be a normal size */
-        .intaSendPayButton svg, 
-        .intaSendPayButton img {
-            width: 20px !important;
-            height: 20px !important;
+
+        /* ULTIMATE PADLOCK CRUSHER - This forces the SVG inside the button to stay small */
+        #payment-container button svg, 
+        #payment-container button img {
+            width: 24px !important;
+            height: 24px !important;
+            max-width: 24px !important;
+            max-height: 24px !important;
             display: inline-block !important;
             vertical-align: middle !important;
-            margin-right: 8px !important;
+            margin-right: 12px !important;
         }
     </style>
 </head>
@@ -183,16 +185,13 @@
                     </h3>
                     <div class="space-y-4 text-slate-700">
                         <p>
-                            <strong class="font-semibold text-slate-800">Eligibility:</strong> Membership is open to all registered students of Egerton University, regardless of their course of study. We welcome anyone with an interest in chemistry!
+                            <strong class="font-semibold text-slate-800">Eligibility:</strong> Membership is open to all registered students of Egerton University, regardless of their course of study.
                         </p>
                         <p>
                             <strong class="font-semibold text-slate-800">Membership Fee:</strong> An annual fee of **KES 100** is required for registration and to support our activities.
                         </p>
                         <p>
-                            <strong class="font-semibold text-slate-800">Membership Certificate:</strong> A membership certificate is available upon request for an additional **KES 100**.
-                        </p>
-                        <p>
-                            <strong class="font-semibold text-slate-800">How to Join:</strong> Simply fill out the application form below. Our Secretary General will review your application and contact you with further details regarding payment and membership confirmation.
+                            <strong class="font-semibold text-slate-800">How to Join:</strong> Simply fill out the application form below. Once complete, you will authorize the KES 100 payment securely via M-Pesa.
                         </p>
                     </div>
                 </div>
@@ -212,7 +211,6 @@
         <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-100 via-transparent to-blue-50 opacity-60 pointer-events-none z-0"></div>
 
         <div class="relative z-10 space-y-8"> 
-
             <div>
                 <label for="full-name" class="block text-slate-700 font-medium mb-1">Full Name</label>
                 <input type="text" id="full-name" name="full-name" required
@@ -283,7 +281,6 @@
                     Submit Application
                 </button>
             </div>
-
         </div> 
     </form>
     
@@ -308,27 +305,12 @@
                     <p class="text-slate-400">
                         Based at Egerton University, we are a community fostering a passion for the chemical sciences.
                     </p>
-                    <div class="flex space-x-5 mt-6">
-                        <a href="https://www.facebook.com/groups/1449855595906544" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-blue-500">
-                            <span class="sr-only">Facebook</span>
-                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
-                        </a>
-                        <a href="https://wa.me/254743569285" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-blue-500">
-                            <span class="sr-only">WhatsApp</span>
-                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.79.46 3.48 1.28 4.96L2 22l5.3-1.38c1.41.75 3.01 1.18 4.74 1.18c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zM12.04 20.15c-1.55 0-3.03-.4-4.32-1.1L3.9 20.28l1.23-3.8c-.83-1.34-1.28-2.9-1.28-4.57c0-4.5 3.65-8.15 8.15-8.15c4.5 0 8.15 3.65 8.15 8.15c0 4.5-3.65 8.15-8.15 8.15zM17.39 14.1c-.2-.1-.72-.36-1.08-.5c-.36-.14-.62-.24-.88.24c-.26.48-.98 1.2-1.2 1.44c-.22.24-.44.28-.8.14c-1.12-.44-2.42-1.2-3.48-2.8c-.8-.1.2-.68 1.14-1.6c.14-.14.28-.34.42-.58c.14-.24.07-.44-.04-.58c-.1-.14-.88-2.1-.12-2.88c-.16-.68-.34-.58-.48-.58c-.14 0-.3 0-.44 0c-.14 0-.38.04-.58.24c-.2.2-.78.74-.78 1.8c0 1.06.8 2.08.92 2.22c.12.14 1.57 2.4 3.8 3.36c.54.22.94.34 1.28.44c.5.14.94.12 1.3.08c.4-.04 1.22-.5 1.4-1c.18-.48.18-.9.12-1c-.06-.1-.2-.14-.4-.24z"/></svg>
-                        </a>
-                        <a href="mailto:egertonchemclub@gmail.com" class="text-slate-400 hover:text-blue-500">
-                            <span class="sr-only">Email</span>
-                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5l-8-5h16zm0 12H4V8l8 5l8-5v10z"/></svg>
-                        </a>
-                    </div>
                 </div>
                 <div>
                     <h3 class="text-sm font-semibold text-slate-100 uppercase tracking-wider">Quick Links</h3>
                     <ul class="mt-4 space-y-3">
                         <li><a href="about.html" class="text-slate-400 hover:text-white">About Us</a></li>
                         <li><a href="index.html#events" class="text-slate-400 hover:text-white">Events</a></li>
-                        <li><a href="about.html#team" class="text-slate-400 hover:text-white">Our Team</a></li>
                         <li><a href="join.html" class="text-white font-semibold">Join</a></li>
                     </ul>
                 </div>
@@ -336,11 +318,9 @@
                     <h3 class="text-sm font-semibold text-slate-100 uppercase tracking-wider">Contact</h3>
                     <ul class="mt-4 space-y-3">
                         <li class="flex items-start">
-                            <svg class="h-5 w-5 text-slate-500 mr-2 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /></svg>
                             <span class="text-slate-400">Egerton University, Njoro, Kenya</span>
                         </li>
                         <li class="flex items-start">
-                            <svg class="h-5 w-5 text-slate-500 mr-2 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 10.884l7.997-5H2.003zM18 7.116l-8 5-8-5V14a2 2 0 002 2h12a2 2 0 002-2V7.116z" /></svg>
                             <a href="mailto:egertonchemclub@gmail.com" class="text-slate-400 hover:text-white">egertonchemclub@gmail.com</a>
                         </li>
                     </ul>
@@ -348,7 +328,7 @@
             </div>
             <div class="mt-12 border-t border-slate-700 pt-8 text-center">
                 <p class="text-sm text-slate-500">
-                    &copy; 2025 Egerton Chemistry Society. All rights reserved.
+                    &copy; 2026 Egerton Chemistry Society. All rights reserved.
                 </p>
             </div>
         </div>
@@ -380,23 +360,12 @@
             const rawFormData = new FormData(form);
             const userRegistrationData = Object.fromEntries(rawFormData.entries());
             
-          form.style.display = 'none';
+            // Hide form, show payment block
+            form.style.display = 'none';
             paymentContainer.style.display = 'block';
             
-            // Render the IntaSend button dynamically with Brute-Force CSS
+            // Render the IntaSend button dynamically (Removed the inline <style> block)
             paymentContainer.innerHTML = `
-                <style>
-                    /* Brute-force fix to crush the giant padlock */
-                    .intaSendPayButton svg, 
-                    .intaSendPayButton img {
-                        max-width: 24px !important;
-                        max-height: 24px !important;
-                        display: inline-block !important;
-                        vertical-align: middle !important;
-                        margin-right: 10px !important;
-                    }
-                </style>
-                
                 <h3 class="text-3xl font-bold text-slate-900 mb-4">Complete Your Registration</h3>
                 <p class="text-slate-600 mb-8 max-w-md mx-auto">Please authorize the <strong>KES 100</strong> membership fee via M-Pesa to finalize your application.</p>
                 
@@ -418,7 +387,6 @@
                 </div>
             `;
 
-            // Let users go back to edit the form
             document.getElementById('go-back-btn').addEventListener('click', () => {
                 paymentContainer.style.display = 'none';
                 form.style.display = 'block';
@@ -426,8 +394,8 @@
 
             // Initialize IntaSend
             let intaSend = new window.IntaSend({
-                publicAPIKey: "ISPubKey_test_1fd575df-2fcf-4ba1-a406-bf5ce655665c", // <-- CHANGE THIS TO YOUR TEST PUBLISHABLE KEY
-                live: false // Keep this false while testing!
+                publicAPIKey: "ISPubKey_test_1fd575df-2fcf-4ba1-a406-bf5ce655665c", 
+                live: false 
             })
             .on("COMPLETE", (response) => {
                 console.log("Payment Successful:", response);
@@ -439,7 +407,6 @@
                     </div>
                 `;
 
-                // Send data to Vercel Database API
                 fetch('/api/save-member', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -475,6 +442,5 @@
             });
         });
     </script>
-
-    </body>
+</body>
 </html>
