@@ -380,16 +380,27 @@
             const rawFormData = new FormData(form);
             const userRegistrationData = Object.fromEntries(rawFormData.entries());
             
-            // Hide form, show payment block
-            form.style.display = 'none';
+          form.style.display = 'none';
             paymentContainer.style.display = 'block';
             
-            // Render the IntaSend button dynamically
+            // Render the IntaSend button dynamically with Brute-Force CSS
             paymentContainer.innerHTML = `
+                <style>
+                    /* Brute-force fix to crush the giant padlock */
+                    .intaSendPayButton svg, 
+                    .intaSendPayButton img {
+                        max-width: 24px !important;
+                        max-height: 24px !important;
+                        display: inline-block !important;
+                        vertical-align: middle !important;
+                        margin-right: 10px !important;
+                    }
+                </style>
+                
                 <h3 class="text-3xl font-bold text-slate-900 mb-4">Complete Your Registration</h3>
                 <p class="text-slate-600 mb-8 max-w-md mx-auto">Please authorize the <strong>KES 100</strong> membership fee via M-Pesa to finalize your application.</p>
                 
-                <button class="intaSendPayButton inline-block px-10 py-4 rounded-full text-xl font-bold bg-[#43B02A] text-white shadow-xl hover:bg-green-700 hover:scale-105 transition-all focus:outline-none focus:ring-4 focus:ring-green-400" 
+                <button class="intaSendPayButton inline-flex items-center justify-center px-10 py-4 rounded-full text-xl font-bold bg-[#43B02A] text-white shadow-xl hover:bg-green-700 hover:scale-105 transition-all focus:outline-none focus:ring-4 focus:ring-green-400" 
                         data-amount="100" 
                         data-currency="KES" 
                         data-email="${email}" 
