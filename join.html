@@ -78,17 +78,6 @@
             @apply bg-white p-8 md:p-10 rounded-xl shadow-lg border border-slate-200;
         }
 
-        /* ULTIMATE PADLOCK CRUSHER - This forces the SVG inside the button to stay small */
-        #payment-container button svg, 
-        #payment-container button img {
-            width: 24px !important;
-            height: 24px !important;
-            max-width: 24px !important;
-            max-height: 24px !important;
-            display: inline-block !important;
-            vertical-align: middle !important;
-            margin-right: 12px !important;
-        }
         /* FIX giant IntaSend padlock icon */
 .intaSendPayButton {
     font-size: 16px !important;   /* stop SVG scaling */
@@ -352,112 +341,141 @@
     </footer>
 
     <script>
-        // Mobile Menu Logic
-        const menuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        menuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
+  // Mobile Menu Logic
+  const menuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+      });
+  });
 
-        // Registration & Payment Logic
-        const form = document.getElementById('joinForm');
-        const paymentContainer = document.getElementById('payment-container');
+  const form = document.getElementById('joinForm');
+  const paymentContainer = document.getElementById('payment-container');
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault(); 
-            
-            // Collect Form Data
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone-number').value;
-            const rawFormData = new FormData(form);
-            const userRegistrationData = Object.fromEntries(rawFormData.entries());
-            
-            // Hide form, show payment block
-            form.style.display = 'none';
-            paymentContainer.style.display = 'block';
-            
-            // Render the IntaSend button dynamically (Removed the inline <style> block)
-            paymentContainer.innerHTML = `
-                <h3 class="text-3xl font-bold text-slate-900 mb-4">Complete Your Registration</h3>
-                <p class="text-slate-600 mb-8 max-w-md mx-auto">Please authorize the <strong>KES 100</strong> membership fee via M-Pesa to finalize your application.</p>
-                
-                <button class="intaSendPayButton inline-flex items-center justify-center px-10 py-4 rounded-full text-xl font-bold bg-[#43B02A] text-white shadow-xl hover:bg-green-700 hover:scale-105 transition-all focus:outline-none focus:ring-4 focus:ring-green-400" 
-                        data-amount="100" 
-                        data-currency="KES" 
-                        data-email="${email}" 
-                        data-phone_number="${phone}"
-                        data-api_ref="EUCCA_${Date.now()}">
-                    Pay KES 100 via M-Pesa
-                </button>
-                
-                <div class="mt-6 space-y-2">
-                    <p class="text-sm text-slate-500 flex items-center justify-center gap-2">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                        Secure processing by IntaSend
-                    </p>
-                    <button type="button" id="go-back-btn" class="text-sm text-blue-600 hover:underline">Cancel and edit form</button>
-                </div>
-            `;
+  function fixIntaSendButton() {
+      const btn = paymentContainer.querySelector('.intaSendPayButton');
+      if (!btn) return;
 
-            document.getElementById('go-back-btn').addEventListener('click', () => {
-                paymentContainer.style.display = 'none';
-                form.style.display = 'block';
-            });
+      btn.style.display = 'inline-flex';
+      btn.style.alignItems = 'center';
+      btn.style.justifyContent = 'center';
+      btn.style.gap = '10px';
+      btn.style.fontSize = '16px';
+      btn.style.lineHeight = '1';
 
-            // Initialize IntaSend
-            let intaSend = new window.IntaSend({
-                publicAPIKey: "ISPubKey_test_1fd575df-2fcf-4ba1-a406-bf5ce655665c", 
-                live: false 
-            })
-            .on("COMPLETE", (response) => {
-                console.log("Payment Successful:", response);
-                
-                paymentContainer.innerHTML = `
-                    <div class="text-center">
-                        <h3 class="text-2xl font-bold text-slate-900 mb-2">Payment Received!</h3>
-                        <p class="text-slate-600 mb-6">Saving your registration details...</p>
-                    </div>
-                `;
+      btn.querySelectorAll('svg, img').forEach(icon => {
+          icon.style.width = '20px';
+          icon.style.height = '20px';
+          icon.style.minWidth = '20px';
+          icon.style.minHeight = '20px';
+          icon.style.maxWidth = '20px';
+          icon.style.maxHeight = '20px';
+          icon.style.flex = '0 0 auto';
+          icon.style.display = 'inline-block';
+          icon.setAttribute('width', '20');
+          icon.setAttribute('height', '20');
+      });
+  }
 
-                fetch('/api/save-member', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        full_name: userRegistrationData['full-name'],
-                        reg_number: userRegistrationData['reg-number'],
-                        phone: userRegistrationData['phone-number'],
-                        email: userRegistrationData['email'],
-                        course: userRegistrationData['course'],
-                        year: userRegistrationData['year-of-study'],
-                        payment_status: 'paid' 
-                    })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    paymentContainer.innerHTML = `
-                        <div class="text-green-500 mb-4">
-                            <svg class="w-20 h-20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        </div>
-                        <h3 class="text-2xl font-bold text-slate-900 mb-2">Welcome to EUCCA!</h3>
-                        <p class="text-slate-600 mb-6">Your registration is complete and securely saved.</p>
-                        <a href="index.html" class="text-blue-600 font-medium hover:underline">Return to Home</a>
-                    `;
-                })
-                .catch(error => {
-                    console.error("Database error:", error);
-                    paymentContainer.innerHTML = `<p class="text-red-500">Payment succeeded, but there was an error saving your details. Please contact the Secretary General.</p>`;
-                });
-            })
-            .on("FAILED", (response) => {
-                console.error("Payment Failed:", response);
-                alert("Payment was cancelled or failed. Please check your balance and try again.");
-            });
-        });
-    </script>
+  form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone-number').value;
+      const rawFormData = new FormData(form);
+      const userRegistrationData = Object.fromEntries(rawFormData.entries());
+
+      form.style.display = 'none';
+      paymentContainer.style.display = 'block';
+
+      paymentContainer.innerHTML = `
+          <h3 class="text-3xl font-bold text-slate-900 mb-4">Complete Your Registration</h3>
+          <p class="text-slate-600 mb-8 max-w-md mx-auto">Please authorize the <strong>KES 100</strong> membership fee via M-Pesa to finalize your application.</p>
+
+          <button class="intaSendPayButton inline-flex items-center justify-center px-10 py-4 rounded-full text-base font-bold bg-[#43B02A] text-white shadow-xl hover:bg-green-700 hover:scale-105 transition-all focus:outline-none focus:ring-4 focus:ring-green-400"
+                  data-amount="100"
+                  data-currency="KES"
+                  data-email="${email}"
+                  data-phone_number="${phone}"
+                  data-api_ref="EUCCA_${Date.now()}">
+              Pay KES 100 via M-Pesa
+          </button>
+
+          <div class="mt-6 space-y-2">
+              <p class="text-sm text-slate-500 flex items-center justify-center gap-2">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                  Secure processing by IntaSend
+              </p>
+              <button type="button" id="go-back-btn" class="text-sm text-blue-600 hover:underline">Cancel and edit form</button>
+          </div>
+      `;
+
+      document.getElementById('go-back-btn').addEventListener('click', () => {
+          paymentContainer.style.display = 'none';
+          form.style.display = 'block';
+      });
+
+      const observer = new MutationObserver(() => {
+          fixIntaSendButton();
+      });
+      observer.observe(paymentContainer, { childList: true, subtree: true });
+
+      setTimeout(fixIntaSendButton, 50);
+      setTimeout(fixIntaSendButton, 300);
+      setTimeout(fixIntaSendButton, 1000);
+
+      let intaSend = new window.IntaSend({
+          publicAPIKey: "ISPubKey_test_1fd575df-2fcf-4ba1-a406-bf5ce655665c",
+          live: false
+      })
+      .on("COMPLETE", (response) => {
+          console.log("Payment Successful:", response);
+
+          paymentContainer.innerHTML = `
+              <div class="text-center">
+                  <h3 class="text-2xl font-bold text-slate-900 mb-2">Payment Received!</h3>
+                  <p class="text-slate-600 mb-6">Saving your registration details...</p>
+              </div>
+          `;
+
+          fetch('/api/save-member', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                  full_name: userRegistrationData['full-name'],
+                  reg_number: userRegistrationData['reg-number'],
+                  phone: userRegistrationData['phone-number'],
+                  email: userRegistrationData['email'],
+                  course: userRegistrationData['course'],
+                  year: userRegistrationData['year-of-study'],
+                  payment_status: 'paid'
+              })
+          })
+          .then(res => res.json())
+          .then(data => {
+              paymentContainer.innerHTML = `
+                  <div class="text-green-500 mb-4">
+                      <svg class="w-20 h-20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  </div>
+                  <h3 class="text-2xl font-bold text-slate-900 mb-2">Welcome to EUCCA!</h3>
+                  <p class="text-slate-600 mb-6">Your registration is complete and securely saved.</p>
+                  <a href="index.html" class="text-blue-600 font-medium hover:underline">Return to Home</a>
+              `;
+          })
+          .catch(error => {
+              console.error("Database error:", error);
+              paymentContainer.innerHTML = `<p class="text-red-500">Payment succeeded, but there was an error saving your details. Please contact the Secretary General.</p>`;
+          });
+      })
+      .on("FAILED", (response) => {
+          console.error("Payment Failed:", response);
+          alert("Payment was cancelled or failed. Please check your balance and try again.");
+      });
+  });
+</script>
 </body>
 </html>
