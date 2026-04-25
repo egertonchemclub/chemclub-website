@@ -78,6 +78,15 @@
         form {
             @apply bg-white p-8 md:p-10 rounded-xl shadow-lg border border-slate-200;
         }
+        /* Force IntaSend's injected padlock to be a normal size */
+        .intaSendPayButton svg, 
+        .intaSendPayButton img {
+            width: 20px !important;
+            height: 20px !important;
+            display: inline-block !important;
+            vertical-align: middle !important;
+            margin-right: 8px !important;
+        }
     </style>
 </head>
 <body class="text-slate-800">
