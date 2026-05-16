@@ -5,7 +5,7 @@ This is the official website for the **Egerton Chemistry Society**, created to s
 ---
 
 ## 🌍 Live Demo
-**Visit here:** [https://chemclub.github.io/egerton-chemistry-society](https://chemclub.github.io/egerton-chemistry-society)
+**Visit here:** [https://egertonchemclub.github.io/chemclub-website/](https://egertonchemclub.github.io/chemclub-website/)
 
 
 ---
