@@ -453,7 +453,7 @@
                   course: userRegistrationData['course'],
                   year: userRegistrationData['year-of-study'],
                   payment_status: 'paid',
-                  invoice_id: response.invoice_id  // <-- THE DIGITAL RECEIPT
+                  invoice_id: response.tracking_id  // <-- THE DIGITAL RECEIPT
               })
           })
           .then(res => {
