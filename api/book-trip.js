@@ -76,7 +76,7 @@ export default async function handler(req, res) {
             throw new Error('Failed to save to bookings table.');
         }
 
-        // --- LAYER 4: UPDATE THE SEAT COUNTER ---
+       // --- LAYER 4: UPDATE THE SEAT COUNTER ---
         // Add 1 to the seats_booked column to lock out future buyers.
         const updateSeats = await fetch(`${SUPABASE_URL}/rest/v1/trips?trip_id=eq.${trip_id}`, {
             method: 'PATCH',
