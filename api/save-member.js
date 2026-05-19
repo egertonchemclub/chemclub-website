@@ -4,8 +4,8 @@ export default async function handler(req, res) {
     }
 
     // 1. Intercept the payload and isolate the digital receipt
-    const { invoice_id, ...memberData } = req.body;
-
+    const payload = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
+    const invoice_id = payload.invoice_id;
     if (!invoice_id) {
         console.warn("Security Alert: Request blocked. No invoice ID provided.");
         return res.status(400).json({ error: 'Security Exception: No payment receipt provided.' });
@@ -48,7 +48,7 @@ export default async function handler(req, res) {
                 'Authorization': `Bearer ${SUPABASE_KEY}`,
                 'Prefer': 'return=representation'
             },
-            body: JSON.stringify(memberData)
+            body: JSON.stringify(payload)
         });
 
         if (!dbReq.ok) {
