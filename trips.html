@@ -6,6 +6,7 @@
     <title>Industrial Visits - Egerton Chemistry Society</title>
     <link rel="stylesheet" href="/dist/output.css">
     <link rel="icon" href="./images/favicon.png?v=2" type="image/png">
+    <script src="https://unpkg.com/intasend-inlinejs-sdk@3.0.4/build/intasend-inline.js"></script>
     <style>
         @font-face { font-family: 'Inter'; src: url('./fonts/InterVariable.woff2') format('woff2'); font-weight: 100 900; font-display: swap; }
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
@@ -117,7 +118,7 @@
                                 A dual visit to <strong>Pfizer</strong> (Pharmaceuticals) and <strong>Osho Chemicals</strong>. Witness drug formulation and agro-chemical manufacturing.
                             </p>
 
-                            <button onclick="openBookingModal('Nairobi Industrial Tour', '800')" 
+                            <button onclick="openBookingModal('NAIROBI-01', '800')" 
                                     class="text-left font-bold text-blue-600 hover:text-blue-800 flex items-center gap-2 mt-auto group transition-colors focus:outline-none">
                                 Book Seat Now 
                                 <span class="transition-transform group-hover:translate-x-1">&rarr;</span>
@@ -299,86 +300,84 @@
         </div>
     </div>
 
-    <script>
-        // *** PASTE YOUR GOOGLE SCRIPT URL HERE ***
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzpAiQT559IJ-vZ5EUgI-P8O1xyoGw7xJ26BJ3OaGCksEBMtHmr6n1b3GYyJnbSS57LKw/exec"; 
+  <script>
+    const bookingModal = document.getElementById('bookingModal');
+    const tripForm = document.getElementById('tripBookingForm');
 
-        const bookingModal = document.getElementById('bookingModal');
-        const paymentModal = document.getElementById('paymentModal');
-        const tripForm = document.getElementById('tripBookingForm');
+    // OPEN MODAL
+    function openBookingModal(tripId, cost) {
+        document.getElementById('modalTripTitle').innerText = "Booking: " + tripId;
+        document.getElementById('modalTripCost').innerText = cost;
+        document.getElementById('tripNameInput').value = tripId; 
+        bookingModal.classList.add('active');
+    }
 
-        // COPY FUNCTION
-        function copyNumber() {
-            const num = "0743569285"; // The raw number to copy
-            navigator.clipboard.writeText(num).then(() => {
-                const feedback = document.getElementById('copyFeedback');
-                feedback.classList.remove('opacity-0');
-                setTimeout(() => {
-                    feedback.classList.add('opacity-0');
-                }, 2000);
-            });
-        }
+    // CLOSE MODAL
+    function closeBookingModal() {
+        bookingModal.classList.remove('active');
+    }
 
-        // OPEN MODAL
-        function openBookingModal(tripName, cost) {
-            document.getElementById('modalTripTitle').innerText = tripName;
-            document.getElementById('modalTripCost').innerText = cost;
-            document.getElementById('tripNameInput').value = tripName;
-            document.getElementById('payAmount').innerText = cost; 
+    // SUBMIT FORM & TRIGGER INTASEND
+    tripForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const btn = document.getElementById('submitBtn');
+        btn.innerText = "PROCESSING...";
+        btn.disabled = true;
+
+        const student_name = document.getElementById('tripName').value;
+        const phone = document.getElementById('tripPhone').value;
+        const trip_id = document.getElementById('tripNameInput').value; 
+        const amount = document.getElementById('modalTripCost').innerText;
+
+        // 1. Initialize IntaSend Sandbox
+        let intasend = new window.IntaSend({
+            publicAPIKey: "ISPubKey_test_1fd575df-2fcf-4ba1-a406-bf5ce655665c", // <-- PASTE YOUR SANDBOX PUBLIC KEY HERE
+            live: false 
+        });
+
+        // 2. What to do when payment succeeds
+        intasend.on("COMPLETE", (response) => {
+            btn.innerText = "VERIFYING SEAT...";
             
-            bookingModal.classList.add('active');
-        }
-
-        // CLOSE MODALS
-        function closeBookingModal() {
-            bookingModal.classList.remove('active');
-        }
-        function closePaymentModal() {
-            paymentModal.classList.remove('active');
-            window.location.reload(); 
-        }
-
-        // SUBMIT FORM
-        tripForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const btn = document.getElementById('submitBtn');
-            const originalText = btn.innerText;
-            btn.innerText = "SAVING...";
-            btn.disabled = true;
-            btn.classList.add('opacity-75', 'cursor-not-allowed');
-
-            const formData = {
-                name: document.getElementById('tripName').value,
-                regNumber: document.getElementById('tripReg').value,
-                phoneNumber: document.getElementById('tripPhone').value,
-                tripType: document.getElementById('tripNameInput').value
-            };
-
-            fetch(GOOGLE_SCRIPT_URL, {
-                method: "POST",
-                mode: "no-cors",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData)
+            // Hand the receipt to the Bouncer
+            fetch('/api/book-trip', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    invoice_id: response.tracking_id,
+                    student_name: student_name,
+                    phone: phone,
+                    trip_id: trip_id
+                })
             })
-            .then(() => {
-                // Hide Booking, Show Payment
-                bookingModal.classList.remove('active');
-                paymentModal.classList.add('active');
-                
-                btn.innerText = originalText;
-                btn.disabled = false;
-                btn.classList.remove('opacity-75', 'cursor-not-allowed');
+            .then(res => res.json().then(data => ({ ok: res.ok, body: data })))
+            .then(result => {
+                if (result.ok) {
+                    alert("Success! Your seat is secured.");
+                    window.location.reload();
+                } else {
+                    alert("Booking Failed: " + result.body.error);
+                    btn.innerText = "SUBMIT & GET PAYMENT INFO";
+                    btn.disabled = false;
+                }
             })
             .catch(err => {
-                console.error("Error:", err);
-                alert("Connection Error. Please try again.");
-                btn.innerText = originalText;
+                alert("Server error during verification.");
                 btn.disabled = false;
-                btn.classList.remove('opacity-75', 'cursor-not-allowed');
             });
         });
-    </script>
+
+        intasend.on("FAILED", () => {
+            alert("Payment cancelled or failed.");
+            btn.innerText = "SUBMIT & GET PAYMENT INFO";
+            btn.disabled = false;
+        });
+
+        // 3. Launch the payment window
+        intasend.run({ amount: amount, currency: "KES" });
+    });
+</script>
 
 </body>
 </html>
