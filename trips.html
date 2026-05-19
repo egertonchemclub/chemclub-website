@@ -7,51 +7,7 @@
     <link rel="stylesheet" href="/dist/output.css">
     <link rel="icon" href="./images/favicon.png?v=2" type="image/png">
     <script src="https://unpkg.com/intasend-inlinejs-sdk@3.0.4/build/intasend-inline.js"></script>
-    <style>
-        @font-face { font-family: 'Inter'; src: url('./fonts/InterVariable.woff2') format('woff2'); font-weight: 100 900; font-display: swap; }
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        .hero-gradient { background: linear-gradient(to right, rgba(23, 23, 35, 0.95), rgba(30, 41, 59, 0.8)); }
-        
-        .card-hover { transition: all 0.3s ease-in-out; }
-        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
-
-        /* --- FORCE MODAL STYLES --- */
-        .custom-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(15, 23, 42, 0.85);
-            z-index: 9999; 
-            display: none; 
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
-
-        .custom-modal-overlay.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .custom-modal-box {
-            background: white;
-            width: 90%;
-            max-width: 500px; 
-            border-radius: 16px; 
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            transform: scale(0.95);
-            transition: transform 0.3s ease;
-            overflow: hidden;
-        }
-
-        .custom-modal-overlay.active .custom-modal-box {
-            transform: scale(1);
-        }
-    </style>
+    
 </head>
 
 <body class="text-slate-800 relative">
@@ -215,132 +171,83 @@
             </div>
         </div>
     </footer>
+<div id="cleanBookingModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex-col items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
+        
+        <div class="px-6 py-4 bg-slate-50 border-b border-slate-100 flex justify-between items-center">
+            <h3 class="text-lg font-extrabold text-slate-900" id="modalTripTitle">Book Your Seat</h3>
+            <button onclick="closeBookingModal()" class="text-slate-400 hover:text-red-500 transition-colors">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+        </div>
 
-    <div id="bookingModal" class="custom-modal-overlay">
-        <div class="custom-modal-box">
-            
-            <div class="bg-slate-900 px-6 py-4 flex justify-between items-center">
+        <div class="p-6">
+            <form id="cleanTripForm" class="space-y-5">
+                <input type="hidden" id="tripIdInput">
+                <input type="hidden" id="tripCostInput">
+                
                 <div>
-                    <h3 class="text-lg font-bold text-white tracking-wide" id="modalTripTitle">Book Seat</h3>
-                    <p class="text-slate-400 text-xs">Complete your registration</p>
-                </div>
-                <button onclick="closeBookingModal()" class="text-slate-400 hover:text-white transition-colors">
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
-                </button>
-            </div>
-
-            <div class="px-8 py-8 sm:px-10">
-                <div class="flex justify-between items-center mb-6 border-b border-slate-100 pb-4">
-                    <span class="text-sm text-slate-500 font-bold uppercase tracking-wider">Total Cost</span>
-                    <span class="text-2xl font-extrabold text-slate-900">KES <span id="modalTripCost">800</span></span>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Full Name</label>
+                    <input type="text" id="tripName" required class="w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all" placeholder="e.g. John Doe">
                 </div>
                 
-                <form id="tripBookingForm" class="space-y-4">
-                    <input type="hidden" id="tripNameInput">
-                    
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Full Name</label>
-                        <input type="text" id="tripName" required class="w-full rounded-md border border-slate-300 px-4 py-2.5 text-slate-900 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 focus:outline-none transition-shadow" placeholder="e.g. John Doe">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Registration Number</label>
-                        <input type="text" id="tripReg" required class="w-full rounded-md border border-slate-300 px-4 py-2.5 text-slate-900 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 focus:outline-none transition-shadow" placeholder="e.g. S13/00000/21">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Phone Number</label>
-                        <input type="tel" id="tripPhone" required class="w-full rounded-md border border-slate-300 px-4 py-2.5 text-slate-900 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 focus:outline-none transition-shadow" placeholder="07XX XXX XXX">
-                    </div>
-
-                    <button type="submit" id="submitBtn" class="w-full mt-4 py-3.5 bg-slate-900 text-white font-bold rounded-lg hover:bg-slate-800 transition shadow-lg text-sm tracking-wide">
-                        SUBMIT & GET PAYMENT INFO
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div id="paymentModal" class="custom-modal-overlay">
-        <div class="custom-modal-box">
-            
-            <div class="bg-slate-900 px-6 py-6 text-center">
-                <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-green-500 mb-3 border-4 border-slate-800">
-                    <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
-                </div>
-                <h3 class="text-xl font-bold text-white">Details Received!</h3>
-                <p class="text-slate-400 text-sm mt-1">Your reservation is pending payment.</p>
-            </div>
-            
-            <div class="px-8 py-8 sm:px-10 space-y-6">
-                
-                <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 text-center relative overflow-hidden">
-                    <p class="text-xs text-slate-500 uppercase font-bold mb-2">Send M-Pesa To:</p>
-                    
-                    <div class="flex items-center justify-center gap-3 mb-1">
-                        <p class="text-3xl font-extrabold text-slate-900 tracking-wider" id="treasurerPhone">0743 569 285</p>
-                        <button onclick="copyNumber()" class="text-slate-400 hover:text-blue-600 transition-colors p-1" title="Copy Number">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                        </button>
-                    </div>
-                    <p id="copyFeedback" class="text-green-600 text-xs font-bold h-4 opacity-0 transition-opacity">Copied!</p>
-                    
-                    <p class="text-sm font-medium text-slate-700 mb-4">James Njoroge</p>
-                    
-                    <div class="border-t border-slate-200 pt-4 flex justify-between items-center px-2">
-                        <span class="text-xs text-slate-500 uppercase font-bold">Pay Amount:</span>
-                        <span class="text-xl font-bold text-slate-900">KES <span id="payAmount">800</span></span>
-                    </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Phone Number</label>
+                    <input type="tel" id="tripPhone" required class="w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all" placeholder="07XX XXX XXX">
                 </div>
 
-                <button onclick="closePaymentModal()" class="w-full rounded-lg bg-slate-900 px-4 py-3.5 text-sm font-bold text-white hover:bg-slate-800 transition shadow-lg tracking-wide">
-                    I HAVE COMPLETED PAYMENT
+                <button type="submit" id="payBtn" class="w-full mt-4 py-4 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition-all shadow-lg flex justify-center items-center gap-2">
+                    Proceed to Payment (KES <span id="btnAmount">800</span>)
                 </button>
-            </div>
+            </form>
         </div>
     </div>
+</div>
 
-  <script>
-    const bookingModal = document.getElementById('bookingModal');
-    const tripForm = document.getElementById('tripBookingForm');
+<script src="https://unpkg.com/intasend-inlinejs-sdk@3.0.4/build/intasend-inline.js"></script>
+<script>
+    const modal = document.getElementById('cleanBookingModal');
+    const form = document.getElementById('cleanTripForm');
+    const payBtn = document.getElementById('payBtn');
 
-    // OPEN MODAL
+    // 1. Open the clean form
     function openBookingModal(tripId, cost) {
+        document.getElementById('tripIdInput').value = tripId;
+        document.getElementById('tripCostInput').value = cost;
+        document.getElementById('btnAmount').innerText = cost;
         document.getElementById('modalTripTitle').innerText = "Booking: " + tripId;
-        document.getElementById('modalTripCost').innerText = cost;
-        document.getElementById('tripNameInput').value = tripId; 
-        bookingModal.classList.add('active');
+        
+        // Use Tailwind's flex to display it
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
     }
 
-    // CLOSE MODAL
+    // 2. Close the form
     function closeBookingModal() {
-        bookingModal.classList.remove('active');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
     }
 
-    // SUBMIT FORM & TRIGGER INTASEND
-    tripForm.addEventListener('submit', function(e) {
+    // 3. Handle Submit & IntaSend
+    form.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        const btn = document.getElementById('submitBtn');
-        btn.innerText = "PROCESSING...";
-        btn.disabled = true;
+        payBtn.innerText = "Processing...";
+        payBtn.disabled = true;
 
         const student_name = document.getElementById('tripName').value;
         const phone = document.getElementById('tripPhone').value;
-        const trip_id = document.getElementById('tripNameInput').value; 
-        const amount = document.getElementById('modalTripCost').innerText;
+        const trip_id = document.getElementById('tripIdInput').value;
+        const amount = document.getElementById('tripCostInput').value;
 
-        // 1. Initialize IntaSend Sandbox
         let intasend = new window.IntaSend({
-            publicAPIKey: "ISPubKey_test_1fd575df-2fcf-4ba1-a406-bf5ce655665c", // <-- PASTE YOUR SANDBOX PUBLIC KEY HERE
+            publicAPIKey: "YOUR_INTASEND_PUBLIC_KEY", // <--- PASTE YOUR SANDBOX KEY HERE
             live: false 
         });
 
-        // 2. What to do when payment succeeds
         intasend.on("COMPLETE", (response) => {
-            btn.innerText = "VERIFYING SEAT...";
+            payBtn.innerText = "Securing Seat in Vault...";
             
-            // Hand the receipt to the Bouncer
             fetch('/api/book-trip', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -358,26 +265,25 @@
                     window.location.reload();
                 } else {
                     alert("Booking Failed: " + result.body.error);
-                    btn.innerText = "SUBMIT & GET PAYMENT INFO";
-                    btn.disabled = false;
+                    payBtn.innerText = "Proceed to Payment";
+                    payBtn.disabled = false;
                 }
             })
             .catch(err => {
-                alert("Server error during verification.");
-                btn.disabled = false;
+                alert("Server Connection Error. Did you put book-trip.js in the api folder?");
+                payBtn.disabled = false;
+                payBtn.innerText = "Proceed to Payment";
             });
         });
 
         intasend.on("FAILED", () => {
-            alert("Payment cancelled or failed.");
-            btn.innerText = "SUBMIT & GET PAYMENT INFO";
-            btn.disabled = false;
+            alert("Payment cancelled.");
+            payBtn.innerText = "Proceed to Payment";
+            payBtn.disabled = false;
         });
 
-        // 3. Launch the payment window
         intasend.run({ amount: amount, currency: "KES" });
     });
 </script>
-
 </body>
 </html>
