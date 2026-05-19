@@ -22,7 +22,7 @@ export default async function handler(req, res) {
 
     try {
         // --- THE BOUNCER: VERIFY WITH INTASEND DIRECTLY ---
-        const verifyReq = await fetch('https://payment.intasend.com/api/v1/payment/status/', {
+        const verifyReq = await fetch('https://sandbox.intasend.com/api/v1/payment/status/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
