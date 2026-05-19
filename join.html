@@ -456,7 +456,12 @@
                   invoice_id: response.invoice_id  // <-- THE DIGITAL RECEIPT
               })
           })
-          .then(res => res.json())
+          .then(res => {
+    if (!res.ok) {
+        throw new Error("Backend failed to save data.");
+    }
+    return res.json();
+})
          .then(data => {
             // THE VIP PASS
             // Replace this dummy link with the actual EUCCA WhatsApp Group Invite Link
